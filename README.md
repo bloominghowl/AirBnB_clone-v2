@@ -35,6 +35,7 @@ This repository contains the initial stage of a student project to build a clone
 ```
 5. This prompt designates you are in the "HBnB" console. There are a variety of commands available within the console program.
 
+
 ##### Commands
     * create - Creates an instance based on given class
 
@@ -47,6 +48,7 @@ This repository contains the initial stage of a student project to build a clone
     * update - Updates existing attributes an object based on class name and UUID
 
     * quit - Exits the program (EOF will as well)
+
 
 
 ##### Alternative Syntax
@@ -69,6 +71,7 @@ Advanced syntax is implemented for the following commands:
 <br>
 <center> <h2>Examples</h2> </center>
 <h3>Primary Command Syntax</h3>
+
 
 ###### Example 0: Create an object
 Usage: create <class_name>
@@ -143,4 +146,4 @@ Usage: <class_name>.update(<_id>, <dictionary>)
 
 <h2><u>AUTHORS</u></h2>
 <h4>Angela Ayivi</h4>
-<h4>Joshua Dei-Alorsei</h4>
+<h4>Joshua Dei-Alorse</h4>
