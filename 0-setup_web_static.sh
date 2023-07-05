@@ -18,7 +18,7 @@ fi
 # Create a symbolic link to test
 ln -sf /data/web_static/releases/test/ /data/web_static/current
 
-# Change ownership to user ubuntu
+# Chown to user ubuntu
 chown -hR ubuntu:ubuntu /data
 
 # Configure nginx to serve content pointed to by symbolic link to hbnb_static
