@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Fabfile that create a .tgz archive from
+""" Fabfile that creates a .tgz archive from
 the contents of web_static folder"""
 
 # if __name__ == '__main__':
