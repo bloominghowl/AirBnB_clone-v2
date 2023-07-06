@@ -3,9 +3,7 @@
 
 from fabric.api import local
 from datetime import datetime
-
 from fabric.decorators import runs_once
-
 
 @runs_once
 def do_pack():
