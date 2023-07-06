@@ -1,38 +1,30 @@
 #!/usr/bin/env bash
 # Sets up a web server for deployment of web_static.
 
-apt-get update
-apt-get install -y nginx
+if ! command -v nginx &> /dev/null; then
+    apt-get -y update
+    apt-get -y install nginx
+fi
 
 mkdir -p /data/web_static/releases/test/
 mkdir -p /data/web_static/shared/
-echo "Hello World again!" > /data/web_static/releases/test/index.html
+
+echo "<html>
+  <head>
+  </head>
+  <body>
+    <p>Test HTML file for Nginx</p>
+  </body>
+</html>" > /data/web_static/releases/test/index.html
+
+if [ -L /data/web_static/current ]; then
+    rm /data/web_static/current
+fi
 ln -sf /data/web_static/releases/test/ /data/web_static/current
 
-chown -R ubuntu /data/
-chgrp -R ubuntu /data/
+chown -R ubuntu:ubuntu /data/
 
-printf %s "server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-    add_header X-Served-By $HOSTNAME;
-    root   /var/www/html;
-    index  index.html index.htm;
-
-    location /hbnb_static {
-        alias /data/web_static/current;
-        index index.html index.htm;
-    }
-
-    location /redirect_me {
-        return 301 http://cuberule.com/;
-    }
-
-    error_page 404 /404.html;
-    location /404 {
-      root /var/www/html;
-      internal;
-    }
-}" > /etc/nginx/sites-available/default
+config_file="/etc/nginx/sites-available/default"
+sed -i '/^\tserver_name localhost;/a \\n\tlocation /hbnb_static {\n\t\talias /data/web_static/current/;\n\t}\n' $config_file
 
 service nginx restart
