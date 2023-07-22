@@ -1,52 +1,51 @@
 #!/usr/bin/python3
-"""A script that starts a Flask web application"""
-from flask import Flask
-from flask import render_template
+"""
+A script that starts a Flask web application
+listening on 0.0.0.0, port 5000
+"""
+from flask import Flask, render_template
 
 app = Flask("__name__")
 
 
-@app.route("/", strict_slashes=False)
-def display_hello():
-    """Prints hello hbnb"""
+@app.route('/', strict_slashes=False)
+def hello():
+    """Function that displays Hello HBNB!"""
     return "Hello HBNB!"
 
 
-@app.route("/hbnb", strict_slashes=False)
-def desplay_hbnb():
-    """Print hbnb"""
+@app.route('/hbnb', strict_slashes=False)
+def hbnb():
+    """Function that displays HBNB"""
     return "HBNB"
 
 
-@app.route("/c/<text>", strict_slashes=False)
-def display_cText(text):
-    """Print C with passed variable"""
-    text = text.replace("_", " ")
-    return "C %s" % (text)
+@app.route('/c/<text>', strict_slashes=False)
+def ctext(text):
+    """Function that displays C followed by the value of the text variable"""
+    return "C {}".format(text.replace("_", " "))
 
 
-@app.route('/python/', strict_slashes=False)
+@app.route('/python', strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
-def display_pythonText(text='is cool'):
-    """ Function called with /python/<text> route """
-    if text != 'is cool':
-        text = text.replace('_', ' ')
-    return 'Python %s' % (text)
+def pythontext(text="is cool"):
+    """Function that displays Python followed by value of text variable"""
+    return "Python {}".format(text.replace("_", " "))
 
 
 @app.route('/number/<int:n>', strict_slashes=False)
-def display_if_int(n):
-    return '%d is a number' % (n)
-
-#
-# @app.route('/number_template/', strict_slashes=False)
+def isnum(n):
+    """Function that displays n is a number only if n is an integer"""
+    if isinstance(n, int):
+        return "{} is a number".format(n)
 
 
 @app.route('/number_template/<int:n>', strict_slashes=False)
-def template_render(n):
-    """Render template if number is an integer"""
-    return render_template('5-number.html', num=n)
+def number_template(n):
+    """Function that displays an HTML page only if n is an integer"""
+    if isinstance(n, int):
+        return render_template("5-number.html", value=n)
 
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=None)
