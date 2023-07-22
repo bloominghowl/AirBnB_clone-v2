@@ -8,7 +8,7 @@ from models.state import State
 from models import storage
 
 
-app = Flask("__name__")
+app = Flask(__name__)
 
 
 @app.teardown_appcontext
